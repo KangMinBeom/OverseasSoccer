@@ -1,25 +1,41 @@
 package com.example.soccer.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDateTime;
+import java.util.Date;
+
 public class SoccerDTO {
-    private String hometeam;
-    private String awayteam;
+    private String homename;
+    private String awayname;
     private String homescore;
     private String awayscore;
 
-    public String getHometeam() {
-        return hometeam;
+    private String utcDate;
+
+    public String getUtcDate() {
+        return utcDate;
     }
 
-    public void setHometeam(String hometeam) {
-        this.hometeam = hometeam;
+    public void setUtcDate(String utcDate) {
+        this.utcDate = utcDate;
     }
 
-    public String getAwayteam() {
-        return awayteam;
+    public void setHomename(String homename) {
+        this.homename = homename;
     }
 
-    public void setAwayteam(String awayteam) {
-        this.awayteam = awayteam;
+    public String getHomename() {
+        return homename;
+    }
+
+    public String getAwayname() {
+        return awayname;
+    }
+
+    public void setAwayname(String awayname) {
+        this.awayname = awayname;
     }
 
     public String getHomescore() {

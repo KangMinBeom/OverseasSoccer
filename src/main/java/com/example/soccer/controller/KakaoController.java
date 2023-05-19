@@ -47,11 +47,12 @@ public class KakaoController {
         }
         System.out.println("controller access_token : " + access_Token);
 
-        return "loginForm1";
+        return "redirect:/League/premier";
     }
 
     @GetMapping("/")
     public String kakologin() {
         return "loginForm";
     }
+
 }
