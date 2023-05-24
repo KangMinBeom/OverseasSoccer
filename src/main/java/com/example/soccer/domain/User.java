@@ -1,10 +1,9 @@
-package com.example.soccer.model;
-import lombok.Builder;
+package com.example.soccer.domain;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "soccer", schema="soccer_info",uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
+@Table(name = "user", schema="soccer_info",uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,11 +15,6 @@ public class User {
 
     @Column(name = "nickname", unique = false, nullable = false)
     private String nickname;
-
-//    @Builder
-//    public User(String username, String email){
-//        this.nickname = nickname;
-//    }
 
     public String getEmail() {
         return email;

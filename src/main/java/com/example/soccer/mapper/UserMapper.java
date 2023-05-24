@@ -1,7 +1,7 @@
 package com.example.soccer.mapper;
 
 import com.example.soccer.dto.UserDTO;
-import com.example.soccer.model.User;
+import com.example.soccer.domain.User;
 
 public class UserMapper {
     public static User convertToModel (UserDTO userDto) {

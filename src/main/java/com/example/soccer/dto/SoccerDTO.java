@@ -7,8 +7,28 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 public class SoccerDTO {
-    private String homename;
-    private String awayname;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long Id) {
+        this.id = id;
+    }
+
+    private Long id;
+
+    public String getGameid() {
+        return gameid;
+    }
+
+    public void setGameid(String gameid) {
+        this.gameid = gameid;
+    }
+
+    private String gameid;
+    private String hometeam;
+    private String awayteam;
     private String homescore;
     private String awayscore;
 
@@ -22,20 +42,20 @@ public class SoccerDTO {
         this.utcDate = utcDate;
     }
 
-    public void setHomename(String homename) {
-        this.homename = homename;
+    public void setHometeam(String hometeam) {
+        this.hometeam = hometeam;
     }
 
-    public String getHomename() {
-        return homename;
+    public String getHometeam() {
+        return hometeam;
     }
 
-    public String getAwayname() {
-        return awayname;
+    public String getAwayteam() {
+        return awayteam;
     }
 
-    public void setAwayname(String awayname) {
-        this.awayname = awayname;
+    public void setAwayteam(String awayteam) {
+        this.awayteam = awayteam;
     }
 
     public String getHomescore() {

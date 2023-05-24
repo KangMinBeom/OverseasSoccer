@@ -2,27 +2,18 @@ package com.example.soccer.service;
 
 import com.example.soccer.dto.UserDTO;
 import com.example.soccer.mapper.UserMapper;
-import com.example.soccer.model.User;
+import com.example.soccer.domain.User;
 import com.example.soccer.repository.UserRepository;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.apache.tomcat.util.json.JSONParser;
-import org.apache.tomcat.util.json.ParseException;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.net.http.HttpHeaders;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 @Service

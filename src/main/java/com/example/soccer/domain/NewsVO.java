@@ -1,4 +1,4 @@
-package com.example.soccer.model;
+package com.example.soccer.domain;
 
 public class NewsVO {
     private String title;

@@ -1,30 +1,15 @@
 package com.example.soccer.controller;
 
-import com.example.soccer.dto.UserDTO;
 import com.example.soccer.mapper.UserMapper;
-import com.example.soccer.model.User;
 import com.example.soccer.repository.UserRepository;
 import com.example.soccer.service.KakaoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.websocket.server.PathParam;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Optional;
 
 @Controller
 public class KakaoController {

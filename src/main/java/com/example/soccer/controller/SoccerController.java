@@ -1,27 +1,19 @@
 package com.example.soccer.controller;
 
 import com.example.soccer.dto.SoccerDTO;
-import com.example.soccer.service.SoccerService;
-import net.bytebuddy.asm.Advice;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import com.example.soccer.service.League.*;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 
@@ -30,11 +22,77 @@ import java.util.List;
 public class SoccerController {
     SoccerDTO soccerDTO;
     @Autowired
-    SoccerService soccerService;
+    PLService soccerService;
+
+    @Autowired
+    PDService pdService;
+
+    @Autowired
+    SA1Service sa1Service;
+
+    @Autowired
+    BD1Service bd1Service;
+
+    @Autowired
+    LAService laService;
+
     @RequestMapping("/premier")
-    public String SoccerInfo(Model model) throws IOException, InterruptedException, ParseException, java.text.ParseException {
-        List<SoccerDTO> list = soccerService.getPremier();
-        model.addAttribute("list",list);
-        return "League/premier2";
+    public String premier(Model model) throws IOException, InterruptedException, ParseException {
+        List<SoccerDTO> list = new ArrayList<>();
+        list = soccerService.getPremier();
+
+        model.addAttribute("list1",list);
+        model.addAttribute("list",soccerService.getPlayer());
+        model.addAttribute("teamlist",soccerService.getTeam());
+
+        return "League/premier";
     }
+
+    @RequestMapping("/premera")
+    public String premera(Model model) throws IOException, InterruptedException, ParseException {
+        List<SoccerDTO> list = new ArrayList<>();
+        list = pdService.getPremera();
+
+        model.addAttribute("list2",list);
+        model.addAttribute("list",pdService.getPlayer());
+        model.addAttribute("teamlist",pdService.getTeam());
+
+        return "League/premera";
+    }
+
+    @RequestMapping("/bundesriga")
+    public String bundesriga(Model model) throws IOException, InterruptedException, ParseException {
+        List<SoccerDTO> list = new ArrayList<>();
+        list = bd1Service.getBundesriga();
+
+        model.addAttribute("list3",list);
+        model.addAttribute("list",bd1Service.getPlayer());
+        model.addAttribute("teamlist",bd1Service.getTeam());
+
+        return "League/bundesriga";
+    }
+
+    @RequestMapping("/leagueang")
+    public String leagueang(Model model) throws IOException, InterruptedException, ParseException {
+        List<SoccerDTO> list = new ArrayList<>();
+        list = laService.getLeagueang();
+
+        model.addAttribute("list4",list);
+        model.addAttribute("list",laService.getPlayer());
+        model.addAttribute("teamlist",laService.getTeam());
+        return "League/leagueang";
+    }
+
+    @RequestMapping("/seriea")
+    public String seriea(Model model) throws IOException, InterruptedException, ParseException {
+        List<SoccerDTO> list = new ArrayList<>();
+        list = sa1Service.getSeriea();
+
+        model.addAttribute("list",sa1Service.getPlayer());
+        model.addAttribute("list5",list);
+        model.addAttribute("teamlist",sa1Service.getTeam());
+
+        return "League/seriea";
+    }
+
 }

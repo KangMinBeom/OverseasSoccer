@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Headers · Bootstrap v5.2</title>
+    <title>분데스리가</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/headers/">
 
@@ -69,21 +69,25 @@
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
       }
+               table{
+                   width: 100%;
+                   border-top: 1px solid #444444;
+                   border-collapse: collapse;
+                 }
+                 th, td {
+                   border-bottom: 1px solid #444444;
+                   padding: 10px;
+                 }
 
-       table {
-           width: 100%;
-           border-top: 1px solid #444444;
-           border-collapse: collapse;
-         }
-         th, td {
-           border-bottom: 1px solid #444444;
-           padding: 10px;
-         }
+
     </style>
     <!-- Custom styles for this template -->
     <link href="headers.css" rel="stylesheet">
   </head>
   <body>
+      <%!
+      int num = 0;
+      %>
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="bootstrap" viewBox="0 0 118 94">
     <title>Bootstrap</title>
@@ -111,29 +115,61 @@
 <div class="container">
     <header class="d-flex justify-content-center py-3">
       <ul class="nav nav-pills">
-        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page"><img src="/image/premier.png" height="30" width="30"/>프리미어리그</a></li>
-        <li class="nav-item"><a href="/login" class="nav-link">프리메라리가</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">분데스리가</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">세리에A</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">리그앙</a></li>
+        <li class="nav-item"><a href="/League/premier" class="nav-link" aria-current="page"><img src="/image/premier.png" height="30" width="30"/>프리미어리그</a></li>
+        <li class="nav-item"><a href="/League/premera" class="nav-link">프리메라리가</a></li>
+        <li class="nav-item"><a href="/League/bundesriga" class="nav-link active">분데스리가</a></li>
+        <li class="nav-item"><a href="/League/seriea" class="nav-link">세리에A</a></li>
+        <li class="nav-item"><a href="/League/leagueang" class="nav-link">리그앙</a></li>
       </ul>
     </header>
   </div>
 </main>
 <table>
       <thead>
+<tr>
+                <td style="text-align: center;">순위</td>
+                <td style="text-align: center;">팀</td>
+                <td style="text-align: center;">경기수</td>
+                <td style="text-align: center;">승점</td>
+                <td style="text-align: center;">승</td>
+                <td style="text-align: center;">무</td>
+                <td style="text-align: center;">패</td>
+                </tr>
+                 <tr>
+                                <c:forEach var="TeamDTO" items="${teamlist}">
+                                        <tr>
+                                            <th style="text-align: center;">${TeamDTO.rank}</th><th style="text-align: center;">${TeamDTO.team}</th><th style="text-align: center;">${TeamDTO.match}</th><th style="text-align: center;">${TeamDTO.point}</th><th style="text-align: center;">${TeamDTO.win}</th><th style="text-align: center;">${TeamDTO.draw}</th><th style="text-align: center;">${TeamDTO.lose}</th>
+                                        </tr>
+                                        </c:forEach>
+                                </tr>
+                </table>
+                <table>
+                <tr>
+                <td style="text-align: center;">순위</td>
+                <td style="text-align: center;">선수</td>
+                <td style="text-align: center;">득점</td>
+                <td style="text-align: center;">도움</td>
+                <td style="text-align: center;">소속팀</td>
+                <td style="text-align: center;">경기수</td>
+                </tr>
+<c:forEach var="PlayerDTO" items="${list}">
         <tr>
-           <td style="text-align: center;">날짜</td><td style="text-align: center;">홈</td><td style="text-align: center;">경기결과</td><td style="text-align: center;">어웨이</td>
-        </tr>
-      </thead>
-      <tbody>
-        <c:forEach var="SoccerDTO" items="${list}">
-        <tr>
-            <th style="text-align: center;">${SoccerDTO.utcDate}</th><th style="text-align: center;">${SoccerDTO.homename}</th><th style="text-align: center;">${SoccerDTO.homescore} : ${SoccerDTO.awayscore}</th><th style="text-align: center;">${SoccerDTO.awayname}</th>
+            <th style="text-align: center;"><%=++num%></th><th style="text-align: center;">${PlayerDTO.player}</th><th style="text-align: center;">${PlayerDTO.goal}</th><th style="text-align: center;">${PlayerDTO.assist}</th><th style="text-align: center;">${PlayerDTO.teamname}</th><th style="text-align: center;">${PlayerDTO.match}</th>
         </tr>
         </c:forEach>
-
-      </tbody>
-</table>
+        </thead>
+                </table>
+<table>
+        <tbody>
+                <tr>
+                   <td style="text-align: center;">날짜</td><td style="text-align: center;">홈</td><td style="text-align: center;">경기결과</td><td style="text-align: center;">어웨이</td>
+                </tr>
+                <c:forEach var="SoccerDTO" items="${list3}">
+                <tr>
+                    <th style="text-align: center;">${SoccerDTO.utcDate}</th><th style="text-align: center;">${SoccerDTO.hometeam}</th><th style="text-align: center;">${SoccerDTO.homescore} : ${SoccerDTO.awayscore}</th><th style="text-align: center;">${SoccerDTO.awayteam}</th>
+                </tr>
+                </c:forEach>
+                </tbody>
+                </table>
   </body>
 </html>
