@@ -1,10 +1,12 @@
-package com.example.soccer.domain;
+package com.example.soccer.dto;
 
-public class NewsVO {
+public class NewsDTO {
     private String title;
+
     private String link;
     private String description;
-    private String pubdate;
+
+    private String pubDate;
 
     public String getTitle() {
         return title;
@@ -22,14 +24,6 @@ public class NewsVO {
         this.link = link;
     }
 
-    public String getPubdate() {
-        return pubdate;
-    }
-
-    public void setPubdate(String pubdate) {
-        this.pubdate = pubdate;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -37,4 +31,15 @@ public class NewsVO {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getPubDate() {
+        return pubDate;
+    }
+
+    public void setPubDate(String pubDate) {
+        this.pubDate = pubDate;
+    }
 }
+
+
+

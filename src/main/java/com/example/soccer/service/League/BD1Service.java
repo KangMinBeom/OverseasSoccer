@@ -18,16 +18,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -84,12 +84,12 @@ public class BD1Service {
 //        this.soccerRepository.saveAll(list1);
 //    }
 
-
+        @Async
         public List<SoccerDTO> getBundesriga() throws IOException, InterruptedException, ParseException {
             List<SoccerDTO> list = new ArrayList<>();
             RestTemplate restTemplate = new RestTemplate();
             RequestEntity<Void> req = RequestEntity
-                    .get("https://api.football-data.org/v4/competitions/BL1/matches?matchday=35")
+                    .get("https://api.football-data.org/v4/competitions/BL1/matches?dateTo=")
                     .header("X-Auth-Token", "b86f67991577423c984a901d381a2de9")
                     .build();
 
@@ -122,9 +122,10 @@ public class BD1Service {
                 dto.setUtcDate(utcDate);
                 list.add(dto);
             }
+            Collections.reverse(list);
             return list;
         }
-
+        @Async
         public List<PlayerDTO> getPlayer () throws IOException, InterruptedException, ParseException {
             List<PlayerDTO> list = new ArrayList<>();
             RestTemplate restTemplate = new RestTemplate();
@@ -160,7 +161,7 @@ public class BD1Service {
             }
             return list;
         }
-
+    @Async
     public List<TeamDTO> getTeam () throws IOException, InterruptedException, ParseException {
         List<TeamDTO> list = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
@@ -198,6 +199,7 @@ public class BD1Service {
                 dto.setPoint(point);
                 list.add(dto);
             }
+
             if(i==0){
                 break;
             }

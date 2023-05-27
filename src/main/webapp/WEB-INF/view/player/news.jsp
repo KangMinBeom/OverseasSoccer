@@ -8,13 +8,13 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>프리미어리그</title>
+    <title>오늘의 뉴스</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/headers/">
 
-    
 
-    
+
+
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
@@ -76,16 +76,39 @@
         -webkit-overflow-scrolling: touch;
       }
       table{
-                         width: 100%;
-                         border-top: 1px solid #444444;
-                         border-collapse: collapse;
-                       }
-                       th, td {
-                         border-bottom: 1px solid #444444;
-                         padding: 10px;
-                       }
 
+                                    border-top: 1px solid #444444;
+                                    border-collapse: collapse;
+                                    }
+                 th, td {
+                   border-bottom: 1px solid #444444;
+                   padding: 10px;
+                 }
+    .search {
+      width: 300px;
+      height: 100px;
+      text-align: center;
+       position:relative;
+    }
+    .search input {
+      width: 80%;
+      height: 30px;
+      font-size: 18px;
+      border: none;
+      border-bottom: 1px black solid;
+         position:relative;
+    }
 
+    .search button {
+      font-size: 18px;
+      border: none;
+      background-color: green;
+      width: 50px;
+      height: 30px;
+      border-radius: 15px;
+      color: #fff;
+      cursor: pointer;
+    }
 
     </style>
     <!-- Custom styles for this template -->
@@ -122,62 +145,31 @@
 <div class="container">
     <header class="d-flex justify-content-center py-3">
       <ul class="nav nav-pills">
-        <li class="nav-item"><a href="/League/premier" class="nav-link active" aria-current="page"><img src="/image/premier.png" height="30" width="30"/>프리미어리그</a></li>
+        <li class="nav-item"><a href="/League/premier" class="nav-link" aria-current="page"><img src="/image/premier.png" height="30" width="30"/>프리미어리그</a></li>
         <li class="nav-item"><a href="/League/premera" class="nav-link"><img src="/image/premera.png" height="30" width="30"/>프리메라리가</a></li>
         <li class="nav-item"><a href="/League/bundesriga" class="nav-link">분데스리가</a></li>
         <li class="nav-item"><a href="/League/seriea" class="nav-link">세리에A</a></li>
         <li class="nav-item"><a href="/League/leagueang" class="nav-link">리그앙</a></li>
-        <li class="nav-item"><a href="/news" class="nav-link">오늘의 뉴스</a></li>
+        <li class="nav-item"><a href="/news?keyword=" class="nav-link active">오늘의 뉴스</a></li>
       </ul>
     </header>
     </div>
 </main>
+<center>
+<div class="search">
+<form action="news" method="GET" class="form-inline p-2 bd-highlight" role="search">
+<input type="text" name="keyword" class="form-control" id="search" placeholder="검색">
+<button type="submit">버튼</button>
+</div>
+</form>
+</center>
 <table>
-      <thead>
-<tr>
-                <td style="text-align: center;">순위</td>
-                <td style="text-align: center;">팀</td>
-                <td style="text-align: center;">경기수</td>
-                <td style="text-align: center;">승점</td>
-                <td style="text-align: center;">승</td>
-                <td style="text-align: center;">무</td>
-                <td style="text-align: center;">패</td>
-                </tr>
-                 <tr>
-                                <c:forEach var="TeamDTO" items="${teamlist}">
-                                        <tr>
-                                            <th style="text-align: center;">${TeamDTO.rank}</th><th style="text-align: center;">${TeamDTO.team}</th><th style="text-align: center;">${TeamDTO.match}</th><th style="text-align: center;">${TeamDTO.point}</th><th style="text-align: center;">${TeamDTO.win}</th><th style="text-align: center;">${TeamDTO.draw}</th><th style="text-align: center;">${TeamDTO.lose}</th>
-                                        </tr>
-                                        </c:forEach>
-                                </tr>
-                </table>
-                <table>
+                <c:forEach var="NewsDTO" items="${list}">
                 <tr>
-                <td style="text-align: center;">순위</td>
-                <td style="text-align: center;">선수</td>
-                <td style="text-align: center;">득점</td>
-                <td style="text-align: center;">도움</td>
-                <td style="text-align: center;">소속팀</td>
-                <td style="text-align: center;">경기수</td>
-                </tr>
-<c:forEach var="PlayerDTO" items="${list}">
-        <tr>
-            <th style="text-align: center;"><%=++num%></th><th style="text-align: center;">${PlayerDTO.player}</th><th style="text-align: center;">${PlayerDTO.goal}</th><th style="text-align: center;">${PlayerDTO.assist}</th><th style="text-align: center;">${PlayerDTO.teamname}</th><th style="text-align: center;">${PlayerDTO.match}</th>
-        </tr>
-        </c:forEach>
-        </thead>
-                </table>
-<table>
-        <tbody>
-                <tr>
-                   <td style="text-align: center;">날짜</td><td style="text-align: center;">홈</td><td style="text-align: center;">경기결과</td><td style="text-align: center;">어웨이</td>
-                </tr>
-                 <c:forEach var="SoccerDTO" items="${list1}">
-                <tr>
-                    <th style="text-align: center;">${SoccerDTO.utcDate}</th><th style="text-align: center;">${SoccerDTO.hometeam}</th><th style="text-align: center;">${SoccerDTO.homescore} : ${SoccerDTO.awayscore}</th><th style="text-align: center;">${SoccerDTO.awayteam}</th>
-                </tr>
+                   <td colspan="4"><th style="text-align: center;">${NewsDTO.title}</a></th></td>
+                   <td colspan="4"><th style="text-align: center;"><a href=${NewsDTO.link}>${NewsDTO.description}</a></th></td>
+               </tr>
                 </c:forEach>
-                </tbody>
                 </table>
   </body>
 </html>

@@ -15,6 +15,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -77,9 +78,9 @@ public class PLService {
 //        this.soccerRepository.saveAll(list1);
 //    }
 
-
-        public List<SoccerDTO> getPremier () throws IOException, InterruptedException, ParseException {
-            List<SoccerDTO> list = new ArrayList<>();
+        @Async
+        public List<SoccerDTO> getPremier () throws IOException, InterruptedException, ParseException{
+        List<SoccerDTO> list = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
         RequestEntity<Void> req = RequestEntity
                 .get("https://api.football-data.org/v4/competitions/PL/matches?matchday=35")
@@ -115,9 +116,10 @@ public class PLService {
             dto.setUtcDate(utcDate);
             list.add(dto);
             }
+            Collections.reverse(list);
         return list;
         }
-
+    @Async
         public List<PlayerDTO> getPlayer () throws IOException, InterruptedException, ParseException {
             List<PlayerDTO> list = new ArrayList<>();
             RestTemplate restTemplate = new RestTemplate();
@@ -153,7 +155,7 @@ public class PLService {
             }
             return list;
         }
-
+    @Async
     public List<TeamDTO> getTeam () throws IOException, InterruptedException, ParseException {
         List<TeamDTO> list = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();

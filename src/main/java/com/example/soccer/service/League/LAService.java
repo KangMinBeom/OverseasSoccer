@@ -18,6 +18,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -83,7 +84,7 @@ public class LAService {
 //        this.soccerRepository.saveAll(list1);
 //    }
 
-
+        @Async
         public List<SoccerDTO> getLeagueang () throws IOException, InterruptedException, ParseException {
             List<SoccerDTO> list = new ArrayList<>();
             RestTemplate restTemplate = new RestTemplate();
@@ -121,9 +122,12 @@ public class LAService {
                 dto.setUtcDate(utcDate);
                 list.add(dto);
             }
+            Collections.reverse(list);
             return list;
         }
 
+
+        @Async
         public List<PlayerDTO> getPlayer () throws IOException, InterruptedException, ParseException {
             List<PlayerDTO> list = new ArrayList<>();
             RestTemplate restTemplate = new RestTemplate();
@@ -159,7 +163,7 @@ public class LAService {
             }
             return list;
         }
-
+    @Async
     public List<TeamDTO> getTeam () throws IOException, InterruptedException, ParseException {
         List<TeamDTO> list = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();

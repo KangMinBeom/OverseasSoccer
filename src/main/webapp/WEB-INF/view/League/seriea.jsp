@@ -19,6 +19,11 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <style>
+
+    body{
+            background-color: #FFFFF0;
+            padding : 50px;
+        }
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -116,10 +121,11 @@
     <header class="d-flex justify-content-center py-3">
       <ul class="nav nav-pills">
         <li class="nav-item"><a href="/League/premier" class="nav-link" aria-current="page"><img src="/image/premier.png" height="30" width="30"/>프리미어리그</a></li>
-        <li class="nav-item"><a href="/League/premera" class="nav-link">프리메라리가</a></li>
+        <li class="nav-item"><a href="/League/premera" class="nav-link"><img src="/image/premera.png" height="30" width="30"/>프리메라리가</a></li>
         <li class="nav-item"><a href="/League/bundesriga" class="nav-link">분데스리가</a></li>
         <li class="nav-item"><a href="/League/seriea" class="nav-link active">세리에A</a></li>
         <li class="nav-item"><a href="/League/leagueang" class="nav-link">리그앙</a></li>
+        <li class="nav-item"><a href="/news" class="nav-link">오늘의 뉴스</a></li>
       </ul>
     </header>
   </div>

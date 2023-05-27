@@ -19,6 +19,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -84,7 +85,7 @@ public class PDService {
 //        this.soccerRepository.saveAll(list2);
 //    }
 
-
+    @Async
     public List<SoccerDTO> getPremera() throws IOException, InterruptedException, ParseException {
         List<SoccerDTO> list = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
@@ -122,9 +123,10 @@ public class PDService {
             dto.setUtcDate(utcDate);
             list.add(dto);
         }
+        Collections.reverse(list);
         return list;
     }
-
+    @Async
     public List<PlayerDTO> getPlayer() throws IOException, InterruptedException, ParseException {
         List<PlayerDTO> list = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
@@ -160,7 +162,7 @@ public class PDService {
         }
         return list;
     }
-
+    @Async
     public List<TeamDTO> getTeam () throws IOException, InterruptedException, ParseException {
         List<TeamDTO> list = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();

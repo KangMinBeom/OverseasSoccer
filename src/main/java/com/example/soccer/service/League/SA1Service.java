@@ -18,6 +18,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -83,7 +84,7 @@ public class SA1Service {
 //        this.soccerRepository.saveAll(list1);
 //    }
 
-
+        @Async
         public List<SoccerDTO> getSeriea () throws IOException, InterruptedException, ParseException {
             List<SoccerDTO> list = new ArrayList<>();
             RestTemplate restTemplate = new RestTemplate();
@@ -121,10 +122,11 @@ public class SA1Service {
                 dto.setUtcDate(utcDate);
                 list.add(dto);
             }
+            Collections.reverse(list);
             return list;
 
         }
-
+        @Async
         public List<PlayerDTO> getPlayer () throws IOException, InterruptedException, ParseException {
             List<PlayerDTO> list = new ArrayList<>();
             RestTemplate restTemplate = new RestTemplate();
@@ -158,13 +160,15 @@ public class SA1Service {
                 dto.setPlayer(playername);
                 list.add(dto);
             }
+
             return list;
         }
+    @Async
     public List<TeamDTO> getTeam () throws IOException, InterruptedException, ParseException {
         List<TeamDTO> list = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
         RequestEntity<Void> req = RequestEntity
-                .get("https://api.football-data.org/v4/competitions/SA1/standings?season=2022")
+                .get("https://api.football-data.org/v4/competitions/SA/standings?season=2022")
                 .header("X-Auth-Token", "b86f67991577423c984a901d381a2de9")
                 .build();
 
