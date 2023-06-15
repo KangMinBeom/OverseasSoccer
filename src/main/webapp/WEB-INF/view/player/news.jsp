@@ -147,9 +147,9 @@
       <ul class="nav nav-pills">
         <li class="nav-item"><a href="/League/premier" class="nav-link" aria-current="page"><img src="/image/premier.png" height="30" width="30"/>프리미어리그</a></li>
         <li class="nav-item"><a href="/League/premera" class="nav-link"><img src="/image/premera.png" height="30" width="30"/>프리메라리가</a></li>
-        <li class="nav-item"><a href="/League/bundesriga" class="nav-link">분데스리가</a></li>
-        <li class="nav-item"><a href="/League/seriea" class="nav-link">세리에A</a></li>
-        <li class="nav-item"><a href="/League/leagueang" class="nav-link">리그앙</a></li>
+        <li class="nav-item"><a href="/League/bundesriga" class="nav-link"><img src="/image/bundesriga.png" height="30" width="30"/>분데스리가</a></li>
+        <li class="nav-item"><a href="/League/seriea" class="nav-link"><img src="/image/seriea.png" height="30" width="30"/>세리에A</a></li>
+        <li class="nav-item"><a href="/League/leagueang" class="nav-link"><img src="/image/leagueang.png" height="30" width="30"/>리그앙</a></li>
         <li class="nav-item"><a href="/news?keyword=" class="nav-link active">오늘의 뉴스</a></li>
       </ul>
     </header>
@@ -167,7 +167,7 @@
                 <c:forEach var="NewsDTO" items="${list}">
                 <tr>
                    <td colspan="4"><th style="text-align: center;">${NewsDTO.title}</a></th></td>
-                   <td colspan="4"><th style="text-align: center;"><a href=${NewsDTO.link}>${NewsDTO.description}</a></th></td>
+                   <td colspan="4"><th style="text-align: center;"><a href = ${NewsDTO.link} target="_blank">${NewsDTO.description}</a></th></td>
                </tr>
                 </c:forEach>
                 </table>

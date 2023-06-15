@@ -122,14 +122,15 @@
       <ul class="nav nav-pills">
         <li class="nav-item"><a href="/League/premier" class="nav-link" aria-current="page"><img src="/image/premier.png" height="30" width="30"/>프리미어리그</a></li>
         <li class="nav-item"><a href="/League/premera" class="nav-link active"><img src="/image/premera.png" height="30" width="30"/>프리메라리가</a></li>
-        <li class="nav-item"><a href="/League/bundesriga" class="nav-link">분데스리가</a></li>
-        <li class="nav-item"><a href="/League/seriea" class="nav-link">세리에A</a></li>
-        <li class="nav-item"><a href="/League/leagueang" class="nav-link">리그앙</a></li>
+        <li class="nav-item"><a href="/League/bundesriga" class="nav-link"><img src="/image/bundesriga.png" height="30" width="30"/>분데스리가</a></li>
+        <li class="nav-item"><a href="/League/seriea" class="nav-link"><img src="/image/seriea.png" height="30" width="30"/>세리에A</a></li>
+        <li class="nav-item"><a href="/League/leagueang" class="nav-link"><img src="/image/leagueang.png" height="30" width="30"/>리그앙</a></li>
         <li class="nav-item"><a href="/news" class="nav-link">오늘의 뉴스</a></li>
       </ul>
     </header>
   </div>
 </main>
+<h4 style="text-align:center";>팀 순위</h4>
 <table>
       <thead>
 <tr>
@@ -144,11 +145,12 @@
                  <tr>
                                 <c:forEach var="TeamDTO" items="${teamlist}">
                                         <tr>
-                                            <th style="text-align: center;">${TeamDTO.rank}</th><th style="text-align: center;">${TeamDTO.team}</th><th style="text-align: center;">${TeamDTO.match}</th><th style="text-align: center;">${TeamDTO.point}</th><th style="text-align: center;">${TeamDTO.win}</th><th style="text-align: center;">${TeamDTO.draw}</th><th style="text-align: center;">${TeamDTO.lose}</th>
+                                            <th style="text-align: center;">${TeamDTO.rank}</th><th style="text-align: center;"><img src="${TeamDTO.image}" height="25" width="25"/><a href ="/League/team?id=${TeamDTO.id}" target="_blank" style="color:black">${TeamDTO.team}</a></th><th style="text-align: center;">${TeamDTO.match}</th><th style="text-align: center;">${TeamDTO.point}</th><th style="text-align: center;">${TeamDTO.win}</th><th style="text-align: center;">${TeamDTO.draw}</th><th style="text-align: center;">${TeamDTO.lose}</th>
                                         </tr>
                                         </c:forEach>
                                 </tr>
                 </table>
+                                <h4 style="text-align:center";>개인 순위</h4>
                 <table>
                 <tr>
                 <td style="text-align: center;">순위</td>
@@ -160,11 +162,12 @@
                 </tr>
 <c:forEach var="PlayerDTO" items="${list}">
         <tr>
-            <th style="text-align: center;"><%=++num%></th><th style="text-align: center;">${PlayerDTO.player}</th><th style="text-align: center;">${PlayerDTO.goal}</th><th style="text-align: center;">${PlayerDTO.assist}</th><th style="text-align: center;">${PlayerDTO.teamname}</th><th style="text-align: center;">${PlayerDTO.match}</th>
+            <th style="text-align: center;"><%=++num%></th><th style="text-align: center;">${PlayerDTO.player}</th><th style="text-align: center;">${PlayerDTO.goal}</th><th style="text-align: center;">${PlayerDTO.assist}</th><th style="text-align: center;"><img src="${PlayerDTO.image}" height="25" width="25"/>${PlayerDTO.teamname}</th><th style="text-align: center;">${PlayerDTO.match}</th>
         </tr>
         </c:forEach>
         </thead>
                 </table>
+                <h4 style="text-align:center";>경기 결과</h4>
 <table>
         <tbody>
                 <tr>
@@ -172,7 +175,7 @@
                 </tr>
                  <c:forEach var="SoccerDTO" items="${list2}">
                 <tr>
-                    <th style="text-align: center;">${SoccerDTO.utcDate}</th><th style="text-align: center;">${SoccerDTO.hometeam}</th><th style="text-align: center;">${SoccerDTO.homescore} : ${SoccerDTO.awayscore}</th><th style="text-align: center;">${SoccerDTO.awayteam}</th>
+                    <th style="text-align: center;">${SoccerDTO.utcDate}</th><th style="text-align: center;"><img src="${SoccerDTO.homeimage}" height="25" width="25"/>${SoccerDTO.hometeam}</th><th style="text-align: center;">${SoccerDTO.homescore} : ${SoccerDTO.awayscore}</th><th style="text-align: center;"><img src="${SoccerDTO.awayimage}" height="25" width="25"/>${SoccerDTO.awayteam}</th>
                 </tr>
                 </c:forEach>
                 </tbody>

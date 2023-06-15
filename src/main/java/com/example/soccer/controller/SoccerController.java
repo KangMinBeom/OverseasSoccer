@@ -1,19 +1,24 @@
 package com.example.soccer.controller;
 
+import com.example.soccer.dto.PlayerDTO;
 import com.example.soccer.dto.SoccerDTO;
 import com.example.soccer.service.League.*;
+import com.example.soccer.service.TeamService;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -21,6 +26,10 @@ import java.util.List;
 @Controller
 public class SoccerController {
     SoccerDTO soccerDTO;
+
+    @Autowired
+    TeamService teamService;
+
     @Autowired
     PLService soccerService;
 
@@ -94,5 +103,17 @@ public class SoccerController {
 
         return "League/seriea";
     }
+
+    @RequestMapping("/team")
+    public String getTeam(Model model,@RequestParam(value = "id",required = true) String Id) throws IOException, InterruptedException, ParseException {
+//        List<PlayerDTO> list = new ArrayList<>();
+//
+
+        model.addAttribute("list1",teamService.getPlayer(Id));
+        model.addAttribute("list2",teamService.getMatch(Id));
+        return "Team/team";
+    }
+
+
 
 }

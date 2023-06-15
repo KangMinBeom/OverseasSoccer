@@ -89,7 +89,7 @@ public class SA1Service {
             List<SoccerDTO> list = new ArrayList<>();
             RestTemplate restTemplate = new RestTemplate();
             RequestEntity<Void> req = RequestEntity
-                    .get("https://api.football-data.org/v4/competitions/SA/matches?matchday=35")
+                    .get("https://api.football-data.org/v4/competitions/SA/matches?season=2022")
                     .header("X-Auth-Token", "b86f67991577423c984a901d381a2de9")
                     .build();
 
@@ -106,7 +106,9 @@ public class SA1Service {
                 String utcDate = parsedDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
                 JSONObject hometeam = (JSONObject) tempObj.get("homeTeam");
                 String homename = String.valueOf(hometeam.get("name"));
+                String homecrest = String.valueOf(hometeam.get("crest"));
                 JSONObject awayteam = (JSONObject) tempObj.get("awayTeam");
+                String awaycrest = String.valueOf(awayteam.get("crest"));
                 String awayname = String.valueOf(awayteam.get("name"));
                 JSONObject score = (JSONObject) tempObj.get("score");
                 JSONObject fulltime = (JSONObject) score.get("fullTime");
@@ -120,6 +122,8 @@ public class SA1Service {
                 dto.setHomescore(homescore);
                 dto.setAwayscore(awayscore);
                 dto.setUtcDate(utcDate);
+                dto.setHomeimage(homecrest);
+                dto.setAwayimage(awaycrest);
                 list.add(dto);
             }
             Collections.reverse(list);
@@ -145,6 +149,7 @@ public class SA1Service {
                 JSONObject player = (JSONObject) tempObj.get("player");
                 String playername = String.valueOf(player.get("name"));
                 JSONObject team = (JSONObject) tempObj.get("team");
+                String crest = String.valueOf(team.get("crest"));
                 String teamname = String.valueOf(team.get("name"));
 //            JSONObject matches = (JSONObject)tempObj.get("playedMatches");
                 String playedMatches = String.valueOf(tempObj.get("playedMatches"));
@@ -152,12 +157,16 @@ public class SA1Service {
                 String goal = String.valueOf(tempObj.get("goals"));
 //            JSONObject assists = (JSONObject) tempObj.get("assists");
                 String assist = String.valueOf(tempObj.get("assists"));
+                if (assist.equals("null")) {
+                    assist = "0";
+                }
                 PlayerDTO dto = new PlayerDTO();
                 dto.setGoal(goal);
                 dto.setAssist(assist);
                 dto.setMatch(playedMatches);
                 dto.setTeamname(teamname);
                 dto.setPlayer(playername);
+                dto.setImage(crest);
                 list.add(dto);
             }
 
@@ -184,6 +193,8 @@ public class SA1Service {
             for(Object obj : table){
                 JSONObject childObj = (JSONObject)obj;
                 JSONObject team = (JSONObject) childObj.get("team");
+                int id = Integer.parseInt(team.get("id").toString());
+                String crest = String.valueOf(team.get("crest"));
                 String rank = String.valueOf(childObj.get("position"));
                 String teamname = String.valueOf(team.get("name"));
                 String playedGames = String.valueOf(childObj.get("playedGames"));
@@ -192,6 +203,7 @@ public class SA1Service {
                 String lose = String.valueOf(childObj.get("lost"));
                 String point = String.valueOf(childObj.get("points"));
                 TeamDTO dto = new TeamDTO();
+                dto.setId(id);
                 dto.setTeam(teamname);
                 dto.setRank(rank);
                 dto.setMatch(playedGames);
@@ -199,6 +211,7 @@ public class SA1Service {
                 dto.setDraw(draw);
                 dto.setLose(lose);
                 dto.setPoint(point);
+                dto.setImage(crest);
                 list.add(dto);
             }
             if(i==0){

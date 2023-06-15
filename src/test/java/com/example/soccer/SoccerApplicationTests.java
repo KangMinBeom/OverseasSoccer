@@ -1,5 +1,6 @@
 package com.example.soccer;
 
+import com.example.soccer.dto.SoccerDTO;
 import com.example.soccer.service.NewsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ class SoccerApplicationTests {
 	}
 	@Test
 	public void test(){
-		newsService.test();
+
 	}
 
 }

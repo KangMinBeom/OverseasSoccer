@@ -1,6 +1,16 @@
 package com.example.soccer.dto;
 
 public class TeamDTO {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
+
     private String rank;
     private String team;
     private String match;
@@ -13,6 +23,18 @@ public class TeamDTO {
 
     private String lose;
 
+    private String image;
+
+    private String coach;
+
+    private String website;
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getRank() {
         return rank;

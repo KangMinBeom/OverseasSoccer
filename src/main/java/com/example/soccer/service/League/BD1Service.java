@@ -22,6 +22,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.persistence.Cacheable;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -83,13 +84,12 @@ public class BD1Service {
 //        list1 = BD1Mapper.converToModelList(list);
 //        this.soccerRepository.saveAll(list1);
 //    }
-
         @Async
         public List<SoccerDTO> getBundesriga() throws IOException, InterruptedException, ParseException {
             List<SoccerDTO> list = new ArrayList<>();
             RestTemplate restTemplate = new RestTemplate();
             RequestEntity<Void> req = RequestEntity
-                    .get("https://api.football-data.org/v4/competitions/BL1/matches?dateTo=")
+                    .get("https://api.football-data.org/v4/competitions/BL1/matches?season=2022")
                     .header("X-Auth-Token", "b86f67991577423c984a901d381a2de9")
                     .build();
 
@@ -106,8 +106,10 @@ public class BD1Service {
                 String utcDate = parsedDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
                 JSONObject hometeam = (JSONObject) tempObj.get("homeTeam");
                 String homename = String.valueOf(hometeam.get("name"));
+                String homecrest = String.valueOf(hometeam.get("crest"));
                 JSONObject awayteam = (JSONObject) tempObj.get("awayTeam");
                 String awayname = String.valueOf(awayteam.get("name"));
+                String awaycrest = String.valueOf(awayteam.get("crest"));
                 JSONObject score = (JSONObject) tempObj.get("score");
                 JSONObject fulltime = (JSONObject) score.get("fullTime");
                 String homescore = String.valueOf(fulltime.get("home"));
@@ -120,6 +122,8 @@ public class BD1Service {
                 dto.setHomescore(homescore);
                 dto.setAwayscore(awayscore);
                 dto.setUtcDate(utcDate);
+                dto.setHomeimage(homecrest);
+                dto.setAwayimage(awaycrest);
                 list.add(dto);
             }
             Collections.reverse(list);
@@ -144,6 +148,7 @@ public class BD1Service {
                 JSONObject player = (JSONObject) tempObj.get("player");
                 String playername = String.valueOf(player.get("name"));
                 JSONObject team = (JSONObject) tempObj.get("team");
+                String crest = String.valueOf(team.get("crest"));
                 String teamname = String.valueOf(team.get("name"));
 //            JSONObject matches = (JSONObject)tempObj.get("playedMatches");
                 String playedMatches = String.valueOf(tempObj.get("playedMatches"));
@@ -151,12 +156,16 @@ public class BD1Service {
                 String goal = String.valueOf(tempObj.get("goals"));
 //            JSONObject assists = (JSONObject) tempObj.get("assists");
                 String assist = String.valueOf(tempObj.get("assists"));
+                if (assist.equals("null")) {
+                    assist = "0";
+                }
                 PlayerDTO dto = new PlayerDTO();
                 dto.setGoal(goal);
                 dto.setAssist(assist);
                 dto.setMatch(playedMatches);
                 dto.setTeamname(teamname);
                 dto.setPlayer(playername);
+                dto.setImage(crest);
                 list.add(dto);
             }
             return list;
@@ -166,7 +175,7 @@ public class BD1Service {
         List<TeamDTO> list = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
         RequestEntity<Void> req = RequestEntity
-                .get("https://api.football-data.org/v4/competitions/BD1/standings?season=2022")
+                .get("https://api.football-data.org/v4/competitions/BL1/standings?season=2022")
                 .header("X-Auth-Token", "b86f67991577423c984a901d381a2de9")
                 .build();
 
@@ -182,6 +191,8 @@ public class BD1Service {
             for(Object obj : table){
                 JSONObject childObj = (JSONObject)obj;
                 JSONObject team = (JSONObject) childObj.get("team");
+                int id = Integer.parseInt(team.get("id").toString());
+                String crest = String.valueOf(team.get("crest"));
                 String rank = String.valueOf(childObj.get("position"));
                 String teamname = String.valueOf(team.get("name"));
                 String playedGames = String.valueOf(childObj.get("playedGames"));
@@ -190,6 +201,7 @@ public class BD1Service {
                 String lose = String.valueOf(childObj.get("lost"));
                 String point = String.valueOf(childObj.get("points"));
                 TeamDTO dto = new TeamDTO();
+                dto.setId(id);
                 dto.setTeam(teamname);
                 dto.setRank(rank);
                 dto.setMatch(playedGames);
@@ -197,6 +209,7 @@ public class BD1Service {
                 dto.setDraw(draw);
                 dto.setLose(lose);
                 dto.setPoint(point);
+                dto.setImage(crest);
                 list.add(dto);
             }
 

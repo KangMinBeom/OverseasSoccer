@@ -8,21 +8,23 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>분데스리가</title>
+    <title>팀 정보</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/headers/">
 
-    
 
-    
+
+
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <style>
+
     body{
-            background-color: #FFFFF0;
-            padding : 50px;
-        }
+        background-color: #FFFFF0;
+        padding : 50px;
+    }
+
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -73,21 +75,40 @@
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
       }
-               table{
-                   width: 100%;
-                   border-top: 1px solid #444444;
-                   border-collapse: collapse;
-                 }
+      table{
+
+                                    border-top: 1px solid #444444;
+                                    border-collapse: collapse;
+                                    }
                  th, td {
                    border-bottom: 1px solid #444444;
                    padding: 10px;
                  }
+    .search {
+      width: 300px;
+      height: 100px;
+      text-align: center;
+       position:relative;
+    }
+    .search input {
+      width: 80%;
+      height: 30px;
+      font-size: 18px;
+      border: none;
+      border-bottom: 1px black solid;
+         position:relative;
+    }
 
-                 .cap{
-                   caption-side: top;
-                   text-align: center;
-                 }
-
+    .search button {
+      font-size: 18px;
+      border: none;
+      background-color: green;
+      width: 50px;
+      height: 30px;
+      border-radius: 15px;
+      color: #fff;
+      cursor: pointer;
+    }
 
     </style>
     <!-- Custom styles for this template -->
@@ -121,72 +142,35 @@
   </symbol>
 </svg>
 <main>
-    <header class="d-flex justify-content-center py-3">
-      <ul class="nav nav-pills">
-        <li class="nav-item"><a href="/League/premier" class="nav-link" aria-current="page"><img src="/image/premier.png" height="30" width="30"/>프리미어리그</a></li>
-        <li class="nav-item"><a href="/League/premera" class="nav-link"><img src="/image/premera.png" height="30" width="30"/>프리메라리가</a></li>
-        <li class="nav-item"><a href="/League/bundesriga" class="nav-link active"><img src="/image/bundesriga.png" height="30" width="30"/>분데스리가</a></li>
-        <li class="nav-item"><a href="/League/seriea" class="nav-link"><img src="/image/seriea.png" height="30" width="30"/>세리에A</a></li>
-        <li class="nav-item"><a href="/League/leagueang" class="nav-link"><img src="/image/leagueang.png" height="30" width="30"/>리그앙</a></li>
-        <li class="nav-item"><a href="/news" class="nav-link">오늘의 뉴스</a></li>
-      </ul>
-    </header>
 </main>
-<div>
-<h4 style="text-align:center";>팀 순위</h4>
+<div style="width:30%; float:left;">
 <table>
-      <thead>
-<tr>
-                <td style="text-align: center;">순위</td>
-                <td style="text-align: center;">팀</td>
-                <td style="text-align: center;">경기수</td>
-                <td style="text-align: center;">승점</td>
-                <td style="text-align: center;">승</td>
-                <td style="text-align: center;">무</td>
-                <td style="text-align: center;">패</td>
-                </tr>
-                 <tr>
-                                <c:forEach var="TeamDTO" items="${teamlist}">
-                                        <tr>
-                                            <th style="text-align: center;">${TeamDTO.rank}</th><th style="text-align: center;"><img src="${TeamDTO.image}" height="25" width="25"/><a href ="/League/team?id=${TeamDTO.id}" target="_blank" style="color:black">${TeamDTO.team}</a></th><th style="text-align: center;">${TeamDTO.match}</th><th style="text-align: center;">${TeamDTO.point}</th><th style="text-align: center;">${TeamDTO.win}</th><th style="text-align: center;">${TeamDTO.draw}</th><th style="text-align: center;">${TeamDTO.lose}</th>
-                                        </tr>
-                                        </c:forEach>
+<tbody>
+                                <tr>
+                                   <td style="text-align: center;">선수</td><td style="text-align: center;">포메이션</td>
                                 </tr>
-                </table>
-                </div>
-                <div>
-                <h4 style="text-align:center";>개인 순위</h4>
-                <table>
+                <c:forEach var="PlayerDTO" items="${list1}">
                 <tr>
-                <td style="text-align: center;">순위</td>
-                <td style="text-align: center;">선수</td>
-                <td style="text-align: center;">득점</td>
-                <td style="text-align: center;">도움</td>
-                <td style="text-align: center;">소속팀</td>
-                <td style="text-align: center;">경기수</td>
-                </tr>
-<c:forEach var="PlayerDTO" items="${list}">
-        <tr>
-            <th style="text-align: center;"><%=++num%></th><th style="text-align: center;">${PlayerDTO.player}</th><th style="text-align: center;">${PlayerDTO.goal}</th><th style="text-align: center;">${PlayerDTO.assist}</th><th style="text-align: center;"><img src="${PlayerDTO.image}" height="25" width="25"/>${PlayerDTO.teamname}</th><th style="text-align: center;">${PlayerDTO.match}</th>
-        </tr>
-        </c:forEach>
-        </thead>
-                </table>
-                </div>
-                <div>
-                <h4 style="text-align:center";>경기 결과</h4>
-<table>
-        <tbody>
-                <tr>
-                   <td style="text-align: center;">날짜</td><td style="text-align: center;">홈</td><td style="text-align: center;">경기결과</td><td style="text-align: center;">어웨이</td>
-                </tr>
-                <c:forEach var="SoccerDTO" items="${list3}">
-                <tr>
-                    <th style="text-align: center;">${SoccerDTO.utcDate}</th><th style="text-align: center;"><img src="${SoccerDTO.homeimage}" height="25" width="25"/>${SoccerDTO.hometeam}</th><th style="text-align: center;">${SoccerDTO.homescore} : ${SoccerDTO.awayscore}</th><th style="text-align: center;"><img src="${SoccerDTO.awayimage}" height="25" width="25"/>${SoccerDTO.awayteam}</th>
-                </tr>
+                  <th style="text-align: center;">${PlayerDTO.player}</a></th></td>
+                  <th style="text-align: center;">${PlayerDTO.position}</a></th></td>
+               </tr>
                 </c:forEach>
                 </tbody>
                 </table>
-                </div>
+</div>
+<div style="width:50%; float:right;">
+                <table>
+                        <tbody>
+                                <tr>
+                                   <td style="text-align: center;">날짜</td><td style="text-align: center;">리그</td><td style="text-align: center;">홈</td><td style="text-align: center;">경기결과</td><td style="text-align: center;">어웨이</td>
+                                </tr>
+                                <c:forEach var="SoccerDTO" items="${list2}">
+                                <tr>
+                                    <th style="text-align: center;">${SoccerDTO.utcDate}</th><th style="text-align: center;"><img src="${SoccerDTO.emblem}" height="35" width="35"/></th><th style="text-align: center;"><img src="${SoccerDTO.homeimage}" height="25" width="25"/>${SoccerDTO.hometeam}</th><th style="text-align: center;">${SoccerDTO.homescore} : ${SoccerDTO.awayscore}</th><th style="text-align: center;"><img src="${SoccerDTO.awayimage}" height="25" width="25"/>${SoccerDTO.awayteam}</th>
+                                </tr>
+                                </c:forEach>
+                                </tbody>
+                                </table>
+</div>
   </body>
 </html>

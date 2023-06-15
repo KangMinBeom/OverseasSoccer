@@ -90,7 +90,7 @@ public class PDService {
         List<SoccerDTO> list = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
         RequestEntity<Void> req = RequestEntity
-                .get("https://api.football-data.org/v4/competitions/PD/matches?matchday=35")
+                .get("https://api.football-data.org/v4/competitions/PD/matches?season=2022")
                 .header("X-Auth-Token", "b86f67991577423c984a901d381a2de9")
                 .build();
 
@@ -107,8 +107,10 @@ public class PDService {
             String utcDate = parsedDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             JSONObject hometeam = (JSONObject) tempObj.get("homeTeam");
             String homename = String.valueOf(hometeam.get("name"));
+            String homecrest = String.valueOf(hometeam.get("crest"));
             JSONObject awayteam = (JSONObject) tempObj.get("awayTeam");
             String awayname = String.valueOf(awayteam.get("name"));
+            String awaycrest = String.valueOf(awayteam.get("crest"));
             JSONObject score = (JSONObject) tempObj.get("score");
             JSONObject fulltime = (JSONObject) score.get("fullTime");
             String homescore = String.valueOf(fulltime.get("home"));
@@ -121,6 +123,8 @@ public class PDService {
             dto.setHomescore(homescore);
             dto.setAwayscore(awayscore);
             dto.setUtcDate(utcDate);
+            dto.setHomeimage(homecrest);
+            dto.setAwayimage(awaycrest);
             list.add(dto);
         }
         Collections.reverse(list);
@@ -145,6 +149,7 @@ public class PDService {
             JSONObject player = (JSONObject) tempObj.get("player");
             String playername = String.valueOf(player.get("name"));
             JSONObject team = (JSONObject) tempObj.get("team");
+            String crest = String.valueOf(team.get("crest"));
             String teamname = String.valueOf(team.get("name"));
 //            JSONObject matches = (JSONObject)tempObj.get("playedMatches");
             String playedMatches = String.valueOf(tempObj.get("playedMatches"));
@@ -152,12 +157,16 @@ public class PDService {
             String goal = String.valueOf(tempObj.get("goals"));
 //            JSONObject assists = (JSONObject) tempObj.get("assists");
             String assist = String.valueOf(tempObj.get("assists"));
+            if (assist.equals("null")) {
+                assist = "0";
+            }
             PlayerDTO dto = new PlayerDTO();
             dto.setGoal(goal);
             dto.setAssist(assist);
             dto.setMatch(playedMatches);
             dto.setTeamname(teamname);
             dto.setPlayer(playername);
+            dto.setImage(crest);
             list.add(dto);
         }
         return list;
@@ -183,6 +192,8 @@ public class PDService {
             for(Object obj : table){
                 JSONObject childObj = (JSONObject)obj;
                 JSONObject team = (JSONObject) childObj.get("team");
+                int id = Integer.parseInt(team.get("id").toString());
+                String crest = String.valueOf(team.get("crest"));
                 String rank = String.valueOf(childObj.get("position"));
                 String teamname = String.valueOf(team.get("name"));
                 String playedGames = String.valueOf(childObj.get("playedGames"));
@@ -191,6 +202,7 @@ public class PDService {
                 String lose = String.valueOf(childObj.get("lost"));
                 String point = String.valueOf(childObj.get("points"));
                 TeamDTO dto = new TeamDTO();
+                dto.setId(id);
                 dto.setTeam(teamname);
                 dto.setRank(rank);
                 dto.setMatch(playedGames);
@@ -198,6 +210,7 @@ public class PDService {
                 dto.setDraw(draw);
                 dto.setLose(lose);
                 dto.setPoint(point);
+                dto.setImage(crest);
                 list.add(dto);
             }
             if(i==0){

@@ -93,9 +93,5 @@ public class NewsService {
 //        }
 //        return list;
 //    }
-    @Scheduled(fixedDelay = 5000)
-    public void test(){
-            System.out.println("테스트입니다.");
-    }
     }
 

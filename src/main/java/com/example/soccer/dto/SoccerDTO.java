@@ -32,6 +32,45 @@ public class SoccerDTO {
     private String homescore;
     private String awayscore;
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    private String code;
+
+    public String getEmblem() {
+        return emblem;
+    }
+
+    public void setEmblem(String emblem) {
+        this.emblem = emblem;
+    }
+
+    private String emblem;
+
+    public String getHomeimage() {
+        return homeimage;
+    }
+
+    public void setHomeimage(String homeimage) {
+        this.homeimage = homeimage;
+    }
+
+    public String getAwayimage() {
+        return awayimage;
+    }
+
+    public void setAwayimage(String awayimage) {
+        this.awayimage = awayimage;
+    }
+
+    private String homeimage;
+
+    private String awayimage;
     private String utcDate;
 
     public String getUtcDate() {
