@@ -176,7 +176,7 @@ table{
                 </tr>
 <c:forEach var="PlayerDTO" items="${list}">
         <tr>
-            <th style="text-align: center;"><%=++num%></th><th style="text-align: center;">${PlayerDTO.player}</th><th style="text-align: center;">${PlayerDTO.goal}</th><th style="text-align: center;">${PlayerDTO.assist}</th><th style="text-align: center;"><img src="${PlayerDTO.image}" height="25" width="25"/><${PlayerDTO.teamname}</th><th style="text-align: center;">${PlayerDTO.match}</th>
+            <th style="text-align: center;"><%=++num%></th><th style="text-align: center;">${PlayerDTO.player}</th><th style="text-align: center;">${PlayerDTO.goal}</th><th style="text-align: center;">${PlayerDTO.assist}</th><th style="text-align: center;"><img src="${PlayerDTO.image}" height="25" width="25"/>${PlayerDTO.teamname}</th><th style="text-align: center;">${PlayerDTO.match}</th>
         </tr>
         </c:forEach>
                 </table>
